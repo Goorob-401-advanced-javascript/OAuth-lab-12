@@ -1,9 +1,9 @@
 'use strict';
-
+require('dotenv').config();
 const superagent = require('superagent');
 const users = require('./users.js');
 
-const tokenServerUrl = 'https://github.com/login/oauth/access_token';
+const tokenSUrl = 'https://github.com/login/oauth/access_token';
 const remoteAPI = 'https://api.github.com/user';
 const CLIENT_ID = process.env.CLIENT_ID ;
 const CLIENT_SECRET = process.env.CLIENT_SECRET ;
@@ -12,19 +12,19 @@ const API_SERVER = process.env.API_SERVER ;
 module.exports = async function authorize(req, res, next) {
   try {
     let code = req.query.code;
-    console.log('my code:', code);
+    // console.log('my code:', code);
 
-    let remoteToken = await exchangeCodeForToken(code);
-    console.log('remote token:', remoteToken);
+    let remoteToken = await tokenCodeExchanger(code);
+    // console.log('remote token:', remoteToken);
 
     let remoteUser = await getRemoteUserInfo(remoteToken);
-    console.log('remote user:', remoteUser);
+    // console.log('remote user:', remoteUser);
 
     let [user, token] = await getUser(remoteUser);
     req.user = user;
     req.token = token;
 
-    console.log('user', user);
+    // console.log('user', user);
 
     next();
   } catch(err) {
@@ -32,7 +32,7 @@ module.exports = async function authorize(req, res, next) {
   }
 }
 
-async function exchangeCodeForToken(code) {
+async function tokenCodeExchanger(code) {
   let tokenResponse = await superagent.post(tokenServerUrl).send({
     code: code,
     client_id: CLIENT_ID,
@@ -57,10 +57,10 @@ async function getRemoteUserInfo(token) {
 async function getUser(remoteUser) {
   let userRecord = {
     username: remoteUser.login,
-    password: 'oauthpassword'
+    password: 'orob'
   }
-
-  let user = await users.save(userRecord);
+  let newUser = new Users(userRecord);
+  let user = await newUser.save();
   let token = users.generateToken(user);
 
   return [user, token];

@@ -6,7 +6,7 @@ const express = require('express');
 const basicAuth = require('./basic-auth-middleware.js');
 const oauthMidd = require('./oauth-middleware.js');
 const User = require('./user.js');
-
+const bearAuth = require('./bearer-auth-middleware');
 const app = express();
 
 app.use(express.json());
@@ -33,7 +33,10 @@ app.get('/oauth',oauthMidd,oauth);
 function oauth(req, res, next) {
   console.log('hello',req.body);
   res.json(req.token);
-}
+} 
+app.get('user' , bearAuth ,(req , res) =>{
+res.status(200).json(req.token);
+});
 module.exports = {
   server: app,
   start: (port) => {

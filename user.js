@@ -50,10 +50,23 @@ users.methods.comparePass = function (password) {
     .then(valid => valid ? this : null);
 };
 //  generateToken after using mongodb and having _id
-users.methods.generateToken = function () {
+users.methods.generateToken = function () {               // generate 
   let token = jwt.sign({id : this._id}, SECRET);
   return token ;
 };
+users.authenticateToken = async  function (token) {   // compare 
+  try {
+    let tokenObject = jwt.verify(token, SECRET);
+        if (tokenObject.username) {
+            return Promise.resolve(tokenObject.username);
+        } else {
+            return Promise.reject();
+        }
+    } catch (e) {
+        return Promise.reject();
+    };
+  }
+              
 
 module.exports = mongoose.model('users', users);
 

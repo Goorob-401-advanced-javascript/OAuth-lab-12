@@ -1,4 +1,4 @@
-# OAuth-lab-12
+# Bearer-Authorization-lab-13
 ## Author:
 Goorob Ahmad Alswalqah
 
@@ -7,7 +7,7 @@ Goorob Ahmad Alswalqah
  
 
 ## How to initialize/run your application (where applicable)
-nodemon 
+node index.js
 
 
 ## ny tests of note? no Describe any tests that you did not complete, skipped, etc?

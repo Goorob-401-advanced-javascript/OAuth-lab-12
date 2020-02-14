@@ -3,7 +3,7 @@
 Goorob Ahmad Alswalqah
 
 ## Links and Resources
-[submission PR](https://github.com/Goorob-401-advanced-javascript/OAuth-lab-12/pull/1)
+[submission PR]()
  
 
 ## How to initialize/run your application (where applicable)
@@ -15,4 +15,4 @@ test not completed yet
 
 
 ## uml
-[UML](https://github.com/Goorob-401-advanced-javascript/OAuth-lab-12/blob/oatuh/20200214_190121.jpg)
+[UML]()

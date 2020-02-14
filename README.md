@@ -3,7 +3,7 @@
 Goorob Ahmad Alswalqah
 
 ## Links and Resources
-[submission PR]()
+[submission PR](https://github.com/Goorob-401-advanced-javascript/OAuth-lab-12/pull/1)
  
 
 ## How to initialize/run your application (where applicable)

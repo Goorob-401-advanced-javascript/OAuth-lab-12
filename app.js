@@ -1,14 +1,16 @@
 
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
 const basicAuth = require('./basic-auth-middleware.js');
+const oauthMidd = require('./oauth-middleware.js');
 const User = require('./user.js');
 
 const app = express();
 
 app.use(express.json());
-
+app.use(express.static('./public'));
 app.post('/signup', (req, res , next) => {
   let user = new User(req.body);
   user.save()
@@ -25,6 +27,9 @@ app.post('/signin', basicAuth, (req, res , next) => {
 // app.get('/users', basicAuth, (req, res) => {
 //   res.status(200).json(users.list());
 // });
+
+app.get('/oauth',oauthMidd,oauth);
+
 function oauth(req, res, next) {
   console.log('hello',req.body);
   res.json(req.token);

@@ -1,9 +1,9 @@
 'use strict';
 require('dotenv').config();
 const superagent = require('superagent');
-const users = require('./users.js');
+const Users = require('./user.js');
 
-const tokenSUrl = 'https://github.com/login/oauth/access_token';
+const tokenServerUrl = 'https://github.com/login/oauth/access_token';
 const remoteAPI = 'https://api.github.com/user';
 const CLIENT_ID = process.env.CLIENT_ID ;
 const CLIENT_SECRET = process.env.CLIENT_SECRET ;
@@ -61,7 +61,7 @@ async function getUser(remoteUser) {
   }
   let newUser = new Users(userRecord);
   let user = await newUser.save();
-  let token = users.generateToken(user);
+  let token = newUser.generateToken(user);
 
   return [user, token];
 }
